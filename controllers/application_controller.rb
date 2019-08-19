@@ -9,7 +9,17 @@ class ApplicationController < Sinatra::Base
 
   enable :sessions
 
+  require 'sinatra'
+
   get '/' do
     erb :index
+  end
+
+  get '/level' do
+    @game_level = params['game_level']
+
+    puts @game_level
+
+    erb :level
   end
 end

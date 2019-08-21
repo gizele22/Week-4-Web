@@ -1,22 +1,22 @@
 <div style="text-align: center;">
 
-<h1>Game Level : <%= session['level'] %></h1>
+<h1 style="background-color:slateblue;">Game Level : <%= session['level'] %></h1>
 
-<h1>Guess The Lucky Number</h1>
+<h1 style="background-color:purple;">Guess The Lucky Number</h1>
 
 <% if session['guessed_number'] != nil || session['guessed_number'] == ' ' %>
+
   <% if session['guessed_number'].to_i > session['secret_number'] %>
-    <p>Guess Number Too Big</p>
-    <h1>Keep Trying</h1>
+    <p style="color:blue;">Guess Number Is Too Big</p>
+    <h1 style="color:white;">Keep Trying</h1>
+
   <% elsif session['guessed_number'].to_i < session['secret_number'] %>
-    <p>Guess Number Too Low</p>
-    <h1>Try Again</h1>
+    <p style="color:blue;">Guess Number Too Low</p>
+    <h1 style="color:white;">Try Again</h1>
   <% end %>
 <% end %>
 
-
-
-<p>Good Luck</p>
+<p style="color:grey;">Good Luck</p>
 <%= session['secret_number'] %>
 
 <form action="/game" method="post">

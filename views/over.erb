@@ -1,1 +1,18 @@
-<p>GAME OVER SUDAH</p>
+<div style="text-align: center;">
+
+<h1 style="background-color:purple; color:white;">GAME OVER</h1>
+<h2 style="color:red;">The Lucky Number:</h2>
+
+<table style="width:100%">
+  <tr>
+    <th><%= session['name'] %></th>
+    <th><%= session['age'] %></th>
+  </tr>
+</table>
+
+
+<%= session['secret_number'] %>
+
+
+<a href="level">PLAY AGAIN</a>
+</div>

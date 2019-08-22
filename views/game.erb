@@ -1,26 +1,31 @@
 <div style="text-align: center;">
+  <h1 style="background-color:slateblue; color:black;">GAME LEVEL : <%= session['level'] %></h1>
 
-<h1 style="background-color:slateblue;">Game Level : <%= session['level'] %></h1>
+  <h1 style="background-color:purple; color:pink;">Guess The Lucky Number</h1>
 
-<h1 style="background-color:purple;">Guess The Lucky Number</h1>
 
-<% if session['guessed_number'] != nil || session['guessed_number'] == ' ' %>
 
-  <% if session['guessed_number'].to_i > session['secret_number'] %>
-    <p style="color:blue;">Guess Number Is Too Big</p>
-    <h1 style="color:white;">Keep Trying</h1>
+  <h1 style="color:blue;">Hi <%= session['name'] %> </h1>
+  <h2 style="color:purple;">GOOD LUCK!</h2>
+  <h2 style="color:slateblue;">You Have 5 Chances To Pick Your Lucky Number</h2>
 
-  <% elsif session['guessed_number'].to_i < session['secret_number'] %>
-    <p style="color:blue;">Guess Number Too Low</p>
-    <h1 style="color:white;">Try Again</h1>
+  <%=  session['secret_number'] %>
+
+  <% if session['guessed_number'] != nil || session['guessed_number'] == ' ' %>
+    <% if session['guessed_number'].to_i > session['secret_number'] %>
+      <p style="color:blue;">Guess Number Is Too Big</p>
+      <h1 style="color:red;">Keep Trying</h1>
+
+    <% elsif session['guessed_number'].to_i < session['secret_number'] %>
+      <p style="color:blue;">Guess Number Is Too Low</p>
+      <h1 style="color:red;">Try Again</h1>
+    <% end %>
   <% end %>
-<% end %>
 
-<p style="color:grey;">Good Luck</p>
-<%= session['secret_number'] %>
 
-<form action="/game" method="post">
-  <input type="number" name="guessed_number" placeholder="Key In Your Lucky Number">
-  <input type="submit" value="Guess">
-</form>
+
+  <form action="/game" method="post">
+    <input type="number" name="guessed_number" placeholder="Key In Your Lucky Number">
+    <input type="submit" value="Guess">
+  </form>
 </div>

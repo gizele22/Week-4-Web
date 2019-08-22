@@ -15,6 +15,13 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  post '/index' do
+    session['name'] = params['name']
+    session['age'] = params['age']
+
+    redirect to('/level')
+  end
+
   get '/level' do
     @game_level = params['game_level']
 
@@ -27,7 +34,7 @@ class ApplicationController < Sinatra::Base
   post '/level' do
     session['level'] = params['game_level']
 
-    session['total_chances'] = 6
+    session['total_chances'] = 5
     session['counter'] = 0
 
     redirect to('/game')
@@ -40,6 +47,7 @@ class ApplicationController < Sinatra::Base
 
   post '/game' do
     session['guessed_number'] = params['guessed_number']
+
     if number_matched_win
       erb :result
     else
@@ -61,43 +69,36 @@ class ApplicationController < Sinatra::Base
     session['game'] = params['guessed_number']
   end
 
-private
-  def secret_number(level)
-    if level == 'easy'
-      rand(1..20)
-    elsif level == 'medium'
-      rand(21..40)
-    else level == 'hard'
-      rand(41..77)
-    end
+  get '/over' do
+      erb :index
   end
 
-  def run_game
-    3
-  end
-
-  def count
-
-    @count = 0
-    session['level'].to_i > session['guessed_number'] = @count
-    if session[guessed_number] = session['secret_number']
-    erb :result
-  else
-    erb :game
-  end
-end
-
-  def number_matched_win
-    session['guessed_number'].to_i == session['secret_number']
-  end
-
-  post '/index' do
-    session['name'] = params['age']
-    if game_end
-      erb :result
+  private
+    def secret_number(level)
+      if level == 'easy'
+        rand(1..20)
+      elsif level == 'medium'
+        rand(21..40)
+      else level == 'hard'
+        rand(41..77)
+      end
     end
 
-  def game_end
-    session[@player_name].to_i == record['age']
-  end
+    def run_game
+      5
+    end
+
+    def count
+      @count = 0
+      session['level'].to_i > session['guessed_number'] = @count
+      if session[guessed_number] = session['secret_number']
+        erb :result
+      else
+        erb :game
+      end
+    end
+
+    def number_matched_win
+      session['guessed_number'].to_i == session['secret_number']
+    end
 end
